@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+venv/
+.conda/
+
+# Large files
+*.pkl
+
+# Dataset files
+data/*.csv
+
+# Temporary files
+*.tmp
