@@ -1,71 +1,147 @@
-# 🍅 Tomato Trait Prediction Using SNP Markers, GWAS, XGBoost and Explainable AI
+# 🍅 AI-Based Tomato Fruit Weight Prediction Using SNP Markers, GWAS, Machine Learning and Explainable AI
 
-## Overview
+## Abstract
 
-Plant breeding traditionally requires multiple generations of field experiments to identify plants with desirable traits. This process is time-consuming and expensive.
+Plant breeding traditionally depends on extensive field experiments to identify plants with desirable agricultural traits. Although effective, conventional breeding requires multiple generations, large resources, and significant time.
 
-This project develops an **AI-based genomic prediction system** that predicts tomato fruit weight using **genetic variation information (SNP markers)**.
+This project presents an **AI-based genomic prediction framework** for predicting tomato fruit weight using genome-wide **Single Nucleotide Polymorphism (SNP)** markers.
 
-The project integrates:
+The proposed system integrates:
 
 - Genome-Wide Association Study (GWAS)
-- Machine Learning based Trait Prediction
+- SNP-based genomic analysis
+- Machine learning regression models
+- Explainable Artificial Intelligence (XAI)
+- Candidate gene identification
+- Interactive genomic visualization
+
+Four machine learning algorithms were implemented and compared:
+
 - XGBoost Regression
-- SHAP Explainable Artificial Intelligence
-- Streamlit Interactive Web Application
+- Random Forest Regression
+- Support Vector Regression (SVR)
+- LightGBM Regression
 
-The aim is to identify important genomic regions associated with tomato fruit weight and develop a prediction system using only SNP information.
+The models learn relationships between thousands of SNP markers and tomato fruit weight variation.
 
----
+SHAP (SHapley Additive exPlanations) analysis was applied to identify the most influential SNP markers contributing to model predictions.
 
-# Project Objective
-
-The main objectives of this project are:
-
-1. Analyze tomato genetic variation using SNP markers.
-
-2. Identify SNPs associated with fruit weight using GWAS.
-
-3. Develop a machine learning model to predict tomato fruit weight from SNP profiles.
-
-4. Identify the contribution of individual SNP markers using SHAP analysis.
-
-5. Develop an interactive web application for genomic trait prediction and visualization.
-
+The developed framework demonstrates how artificial intelligence and genomics can be combined for **genomic-assisted breeding and precision agriculture**.
 
 ---
 
-# Biological Background
+# 1. Introduction
 
-## SNP (Single Nucleotide Polymorphism)
+## 1.1 Background
 
-A SNP is a variation at a single nucleotide position in the DNA sequence among individuals.
+Crop improvement programs aim to develop plants with improved characteristics such as:
+
+- Higher yield
+- Increased fruit size
+- Better quality
+- Disease resistance
+- Environmental adaptability
+
+Traditional breeding methods require evaluating plants through multiple generations of field trials.
+
+Although successful, these methods are:
+
+- Time-consuming
+- Expensive
+- Dependent on environmental conditions
+
+
+Modern genomic approaches use DNA-level information to accelerate breeding decisions.
+
+Single Nucleotide Polymorphisms (SNPs) are widely used genetic markers that represent variations in DNA sequences between individuals.
+
+By combining SNP information with machine learning, complex relationships between genetic variation and plant traits can be modeled.
+
+---
+
+# 2. Research Motivation
+
+Tomato fruit weight is a quantitative trait controlled by multiple genes and genomic regions.
+
+Understanding these genetic factors can help accelerate tomato improvement programs.
+
+The motivation of this project is to develop a computational framework that can:
+
+1. Identify genomic regions associated with fruit weight.
+2. Predict fruit weight using only genetic information.
+3. Identify important SNP markers influencing predictions.
+4. Connect significant SNPs with biological candidate genes.
+5. Provide an interactive platform for genomic analysis.
+
+---
+
+# 3. Project Objectives
+
+## Genetic Analysis Objectives
+
+- Analyze genome-wide SNP variation.
+- Perform Genome-Wide Association Study (GWAS).
+- Identify SNP markers associated with tomato fruit weight.
+- Study chromosome-wise SNP distribution.
+
+## Machine Learning Objectives
+
+- Develop genomic prediction models using SNP markers.
+- Compare multiple regression algorithms.
+- Evaluate prediction accuracy using statistical metrics.
+
+## Explainable AI Objectives
+
+- Identify important SNP markers.
+- Measure SNP contribution to predictions.
+- Interpret machine learning results biologically.
+
+## Application Objectives
+
+- Develop an interactive Streamlit dashboard.
+- Visualize genomic results.
+- Predict fruit weight for individual tomato plants.
+
+---
+
+# 4. Biological Background
+
+## 4.1 Single Nucleotide Polymorphism (SNP)
+
+A Single Nucleotide Polymorphism is a variation at a single nucleotide position in the DNA sequence among individuals.
 
 Example:
 
-```
+
 Plant A:
+
 A T G C
 
 Plant B:
+
 A T A C
-```
+
 
 The nucleotide difference represents a SNP.
 
-SNP markers act as genetic fingerprints that can be used to study relationships between genetic variation and plant traits.
+SNP markers act as genetic fingerprints and are widely used in:
+
+- Genetic mapping
+- GWAS studies
+- Genomic selection
+- Crop improvement
 
 ---
 
-# Dataset Description
+# 5. Dataset Description
 
-## Dataset Source
+## 5.1 Dataset Source
 
-The dataset used in this project is the tomato:
+The dataset used in this project is:
 
 **Solanum pennellii Backcross Inbred Lines (BILs) Population**
 
-Dataset source:
+Dataset Repository:
 
 https://datadryad.org/dataset/doi:10.5061/dryad.2fqz612wx
 
@@ -75,15 +151,28 @@ The dataset contains:
 - Genome-wide SNP marker information
 - Tomato plant identifiers
 - Phenotypic measurements
-
+- Fruit weight observations
 
 ---
 
-# Genotype Dataset
+# 6. Dataset Statistics
 
-The genotype dataset contains SNP marker information for tomato plants.
+| Parameter | Value |
+|-----------|-------|
+| Species | Tomato |
+| Population | Solanum pennellii BILs |
+| Number of Plants | 1148 |
+| SNP Markers | 7699 |
+| Number of Chromosomes | 12 |
+| Target Trait | Fruit Weight (BILs FW(gr)) |
 
-Structure:
+---
+
+# 7. Genotype Dataset
+
+The genotype dataset contains SNP marker information for each tomato plant.
+
+Example:
 
 | Plant ID | SNP1 | SNP2 | SNP3 |
 |----------|------|------|------|
@@ -91,35 +180,55 @@ Structure:
 | p-10-1 | 3 | 1 | 3 |
 
 
-## Genotype Encoding
+Each SNP column represents a genetic marker position.
 
-The SNP values are encoded as:
-
-```
-1 → Parent allele 1
-3 → Parent allele 2
-```
-
-These encoded values represent different allele states inherited from the parents.
-
-Dataset statistics:
-
-- Number of tomato plants: 1148
-- Number of SNP markers: 7699
-- Number of chromosomes: 12
-
+The genotype matrix is used as input features for machine learning models.
 
 ---
 
-# Phenotype Dataset
+# 8. SNP Encoding
 
-The phenotype dataset contains measured plant traits.
+The original genotype dataset is already numerically encoded.
 
-The target trait used in this project:
+The encoding represents inheritance from two parental lines.
 
-```
+
+Encoding:
+
+
+1 → Parent 1 allele
+
+3 → Parent 2 allele
+
+
+
+Example:
+
+
+SNP1 = 1
+
+The plant contains Parent 1 allele
+
+SNP2 = 3
+
+The plant contains Parent 2 allele
+
+
+
+These encoded values allow machine learning algorithms to process genetic variation mathematically.
+
+---
+
+# 9. Phenotype Dataset
+
+The phenotype dataset contains measured physical characteristics of tomato plants.
+
+The target trait selected in this project is:
+
+
 Fruit Weight (BILs FW(gr))
-```
+
+
 
 Example:
 
@@ -129,322 +238,793 @@ Example:
 | p-10-1 | 35.4 g |
 
 
+The objective of the prediction models is:
+
+
+Input:
+
+SNP genotype profile
+
+Output:
+
+Predicted fruit weight
+
+
 ---
 
-# Project Workflow
+# 10. Complete Computational Workflow
 
-```
-                 Genotype Data
-                       |
-                       |
-                       ↓
-             Data Preprocessing
-                       |
-                       ↓
-              GWAS Analysis
-                       |
-                       ↓
-          Significant SNP Identification
-                       |
-                       ↓
-            XGBoost Regression Model
-                       |
-                       ↓
-             SHAP Explainability
-                       |
-                       ↓
-          Candidate Gene Interpretation
-                       |
-                       ↓
+
+             SNP Genotype Data
+
+                     |
+
+                     ↓
+
+          Data Preprocessing
+
+                     |
+
+                     ↓
+
+          Genome-Wide Association Study
+
+                     |
+
+                     ↓
+
+         Significant SNP Identification
+
+                     |
+
+                     ↓
+
+          Machine Learning Models
+
+      --------------------------------
+
+      |              |              |
+
+   XGBoost      Random Forest      SVR
+
+                     |
+
+                  LightGBM
+
+                     |
+
+                     ↓
+
+             Model Evaluation
+
+                     |
+
+                     ↓
+
+            SHAP Explainability
+
+                     |
+
+                     ↓
+
+          Candidate Gene Analysis
+
+                     |
+
+                     ↓
+
           Streamlit Web Application
 
-```
+---
+
+# 11. Data Preprocessing
+
+Before performing GWAS and machine learning, the raw datasets were processed.
+
+## Steps Performed
+
+### 1. Genotype Quality Checking
+
+The genotype data was examined for:
+
+- Missing values
+- Incorrect formatting
+- Sample consistency
+- Duplicate information
 
 
 ---
 
-# Methodology
+### 2. Phenotype Processing
 
-## 1. Data Preprocessing
+The phenotype dataset was processed to:
 
-The raw genotype and phenotype datasets were processed before analysis.
-
-Steps performed:
-
-- Checked genotype quality
-- Checked phenotype distribution
-- Removed missing values
-- Matched genotype and phenotype samples using Plant ID
+- Select fruit weight as target trait.
+- Remove incomplete measurements.
+- Maintain correct plant identifiers.
 
 
-After alignment:
+---
 
-```
-Samples used:
+### 3. Genotype-Phenotype Alignment
+
+Both datasets were matched using Plant ID.
+
+Only plants containing:
+
+- Complete SNP information
+- Valid fruit weight measurements
+
+were retained.
+
+
+Final dataset:
+
+
+Samples:
+
 1148 tomato plants
 
 Features:
+
 7699 SNP markers
-```
+
+Target:
+
+Fruit Weight
 
 
 ---
+# 12. Genome-Wide Association Study (GWAS)
 
-# 2. Genome-Wide Association Study (GWAS)
+## 12.1 Overview
 
-GWAS was performed to identify SNP markers associated with fruit weight.
+Genome-Wide Association Study (GWAS) is a statistical approach used to identify genetic variants associated with specific biological traits.
 
-GWAS evaluates each SNP independently and determines whether genetic variation at that location is related to differences in fruit weight.
+In this project, GWAS was performed to identify SNP markers associated with tomato fruit weight.
 
-The statistical significance is measured using:
+Each SNP marker was individually tested to determine whether genetic variation at that location contributes to differences in fruit weight.
 
-```
-P-value
-```
+---
 
-A smaller p-value indicates stronger association.
+## 12.2 GWAS Principle
 
-Example:
 
-```
+The basic workflow of GWAS:
+
+
+SNP Marker
+
+  +
+
+Phenotypic Trait
+
+  ↓
+
+Statistical Association Test
+
+  ↓
+
+P-value Calculation
+
+  ↓
+
+Significant SNP Identification
+
+
+
+A smaller p-value indicates stronger evidence that a SNP is associated with fruit weight.
+
+---
+
+## 12.3 GWAS Output
+
+The GWAS analysis generated:
+
+- SNP association table
+- Chromosome information
+- SNP positions
+- P-values
+- Manhattan plot
+- QQ plot
+
+
+Example significant SNP:
+
+
 SNP:
+
 SSL2.50CH11_2693462
 
 P-value:
+
 2.66 × 10^-15
-```
-
-Output generated:
-
-- GWAS result table
-- Manhattan Plot
-- QQ Plot
 
 
 ---
 
-# 3. Manhattan Plot
+# 13. Manhattan Plot Analysis
 
-The Manhattan plot visualizes SNP-trait associations.
 
-Components:
+The Manhattan plot provides a genome-wide visualization of SNP-trait associations.
 
-X-axis:
 
-```
+![Manhattan Plot](outputs/Manhattan_Plot_Correct.png)
+
+
+## Interpretation
+
+
+### X-axis
+
+Represents:
+
+
 Chromosome position
-```
 
-Y-axis:
 
-```
+
+### Y-axis
+
+Represents:
+
+
 -log10(P-value)
-```
 
 
-Each point represents one SNP marker.
 
-Higher peaks indicate SNP regions strongly associated with fruit weight.
+Each point represents an individual SNP marker.
+
+Higher peaks indicate genomic regions with stronger associations with tomato fruit weight.
+
+These significant regions may contain genes responsible for fruit development and weight regulation.
+
+---
+
+# 14. QQ Plot Analysis
 
 
-![Manhattan Plot](docs/Manhattan_Plot.png)
+The Quantile-Quantile (QQ) plot evaluates the statistical reliability of GWAS results.
+
+
+![QQ Plot](outputs/QQ_FW.png)
+
+
+## Interpretation
+
+
+The QQ plot compares:
+
+
+Expected SNP distribution
+
+    vs
+
+Observed SNP association values
+
+
+
+A well-calibrated GWAS result follows the diagonal line.
+
+Deviation from the diagonal indicates SNPs with significant associations.
+
+---
+
+# 15. Machine Learning Based Genomic Prediction
+
+
+After identifying genomic variation, machine learning models were developed to predict tomato fruit weight using SNP profiles.
+
+## Input Features
+
+The input to the models:
+
+
+7699 SNP markers
+
+
+
+Example genotype profile:
+
+
+1,3,1,3,3,1,1,...
+
+
+
+## Prediction Output
+
+The models predict:
+
+
+Fruit Weight (grams)
+
+
+
+The models learn complex relationships between SNP combinations and phenotypic variation.
+
+---
+
+# 16. Machine Learning Models
+
+
+Four regression algorithms were implemented and compared.
+
+---
+
+# 16.1 XGBoost Regression
+
+
+XGBoost (Extreme Gradient Boosting) is an ensemble machine learning algorithm based on decision trees.
+
+
+Advantages:
+
+- Handles high-dimensional genomic data
+- Captures nonlinear SNP interactions
+- Provides feature importance analysis
+- Robust against overfitting
+
+
+Performance:
+
+
+Mean R² Score:
+
+0.244
 
 
 ---
 
-# 4. QQ Plot
-
-The QQ plot evaluates the quality of GWAS results.
-
-It compares:
-
-```
-Expected statistical distribution
-
-vs
-
-Observed SNP associations
-```
-
-A good QQ plot follows the diagonal line.
-
-Large deviations indicate significant SNP associations.
+# 16.2 Random Forest Regression
 
 
-![QQ Plot](docs/QQ_plot.png)
+Random Forest is an ensemble learning method that combines multiple decision trees.
+
+
+Advantages:
+
+- Handles thousands of SNP features
+- Reduces overfitting
+- Captures complex genetic relationships
+
+
+Performance:
+
+
+Mean R² Score:
+
+0.276
 
 
 ---
 
-# 5. Machine Learning Model
-
-## XGBoost Regression
-
-After SNP analysis, machine learning was applied to predict fruit weight.
-
-### Input:
-
-```
-SNP genotype profile
-```
-
-Example:
-
-```
-1,3,1,3,1,...
-```
+# 16.3 Support Vector Regression (SVR)
 
 
-### Output:
-
-```
-Predicted Fruit Weight (grams)
-```
+Support Vector Regression uses kernel-based learning to model complex relationships between genotype and phenotype.
 
 
-The model learns relationships between SNP combinations and fruit weight.
+Advantages:
+
+- Effective for high-dimensional datasets
+- Works well when number of features is large
+- Provides stable prediction performance
+
+
+Performance:
+
+
+Mean R² Score:
+
+0.258
+
 
 ---
 
-# Model Evaluation
+# 16.4 LightGBM Regression
 
-The model performance was evaluated using:
+
+LightGBM is a gradient boosting framework optimized for fast training and efficient handling of large feature spaces.
+
+
+Advantages:
+
+- Faster gradient boosting implementation
+- Efficient memory usage
+- Handles thousands of SNP markers
+
+
+Performance:
+
+
+Mean R² Score:
+
+0.277
+
+
+---
+
+# 17. Model Evaluation
+
+
+The performance of each model was evaluated using the coefficient of determination (R²).
+
 
 ## R² Score
 
-R² measures how much variation in fruit weight is explained by the SNP markers.
 
-Current model performance:
+R² represents how much variation in fruit weight can be explained by SNP information.
 
-```
-Mean R² ≈ 0.24
-```
 
-This indicates that SNP information explains a significant portion of fruit weight variation.
+Formula:
+
+
+R² = 1 - (Residual Variation / Total Variation)
+
+
+
+Higher R² values indicate better prediction ability.
+
+---
+
+# 18. Model Performance Comparison
+
+
+| Model | Mean R² | Standard Deviation |
+|-------|---------|-------------------|
+| XGBoost | 0.244 | 0.051 |
+| Random Forest | 0.276 | 0.041 |
+| SVR | 0.258 | 0.036 |
+| LightGBM | 0.277 | 0.054 |
 
 
 ---
 
-# 6. SHAP Explainability
-
-Machine learning models can produce predictions but are difficult to interpret.
-
-SHAP (SHapley Additive exPlanations) was used to identify:
-
-- Important SNP markers
-- Contribution of each SNP
-- Influence on prediction
+# 19. Model Comparison Visualization
 
 
-Example output:
-
-| SNP | Mean SHAP |
-|-|-|
-| SSL2.50CH11_2693462 | 0.97 |
-| SSL2.50CH11_1292776 | 0.76 |
+![Model Comparison](outputs/model_comparison.png)
 
 
-![SHAP Summary](docs/SHAP_summary.png)
+## Observation
+
+
+The comparison shows:
+
+- LightGBM achieved the highest average R² score.
+- Random Forest produced comparable performance.
+- SVR showed stable prediction behaviour.
+- XGBoost successfully captured SNP-based relationships.
 
 
 ---
 
-# 7. Candidate Gene Analysis
+# 20. Predicted vs Actual Analysis
 
-Important SNPs can be further investigated by identifying nearby genes.
+
+Predicted versus actual plots were generated to evaluate model prediction quality.
+
+
+## XGBoost Prediction
+
+
+![XGBoost Predicted vs Actual](outputs/xgboost_predicted_actual.png)
+
+
+
+## Random Forest Prediction
+
+
+![Random Forest Predicted vs Actual](outputs/random_forest_predicted_actual.png)
+
+
+
+## SVR Prediction
+
+
+![SVR Predicted vs Actual](outputs/svr_predicted_actual.png)
+
+
+
+## LightGBM Prediction
+
+
+![LightGBM Predicted vs Actual](outputs/lightgbm_predicted_actual.png)
+
+
+
+## Interpretation
+
+
+The diagonal line represents ideal prediction.
+
+Points closer to the diagonal indicate:
+
+- Better prediction accuracy
+- Stronger relationship between predicted and observed fruit weight
+
+
+---
+
+# 21. Model Selection
+
+
+Based on cross-validation performance:
+
+
+Best Performing Model:
+
+LightGBM Regression
+
+Mean R²:
+
+0.277
+
+
+
+However, all models were retained because different algorithms capture different patterns within genomic datasets.
+
+---
+
+# 22. Explainable Artificial Intelligence (SHAP Analysis)
+
+
+Machine learning models provide predictions but do not directly explain biological reasons behind those predictions.
+
+To overcome this limitation, SHAP analysis was performed.
+
+---
+
+## 22.1 SHAP Principle
+
+
+SHAP (SHapley Additive exPlanations) calculates the contribution of each SNP marker toward the final prediction.
+
 
 Workflow:
 
-```
-Important SNP
 
-↓
+Trained ML Model
 
-Chromosome position
+    ↓
 
-↓
+SHAP Value Calculation
 
-Nearest gene
+    ↓
 
-↓
+SNP Importance Ranking
 
-Biological function
+    ↓
 
-↓
-
-Trait association
-```
+Biological Interpretation
 
 
-Known tomato fruit-related genes include:
 
+SHAP values indicate:
 
-## FAS (FASCIATED)
-
-Function:
-
-- Controls carpel number
-- Influences fruit size
-- Affects fruit weight
-
-
-## LC (LOCULE NUMBER)
-
-Function:
-
-- Controls locule number
-- Influences fruit size
-
-
-## SUN
-
-Function:
-
-- Controls fruit shape
-- Regulates fruit elongation
+- Positive contribution → increases predicted fruit weight
+- Negative contribution → decreases predicted fruit weight
 
 
 ---
 
-# Web Application
-
-A Streamlit-based web application was developed for interactive analysis.
+# 23. SHAP Summary Plot
 
 
-## Features
+![SHAP Summary](outputs/SHAP_summary.png)
 
 
-## 1. Tomato Trait Prediction
+## Interpretation
+
+
+The SHAP summary plot displays:
+
+- Most influential SNP markers
+- Direction of SNP influence
+- Relative importance of genetic features
+
+
+The SNPs at the top have the highest impact on model predictions.
+
+
+---
+
+# 24. Candidate Gene Identification
+
+
+Important SNP markers identified through SHAP analysis were further investigated for nearby genes.
+
+
+Workflow:
+
+
+Important SNP
+
+    ↓
+
+Chromosome Location
+
+    ↓
+
+Nearby Gene Search
+
+    ↓
+
+Biological Function Analysis
+
+    ↓
+
+Trait Association
+
+
+
+Candidate gene identification connects machine learning results with biological knowledge.
+
+# 25. Candidate Gene Analysis
+
+
+The important SNP markers identified through SHAP analysis represent genomic regions that may influence tomato fruit weight.
+
+To understand the biological relevance of these SNPs, nearby genes were investigated.
+
+The workflow:
+
+
+Important SNP Marker
+
+      ↓
+
+Chromosome Position
+
+      ↓
+
+Nearby Gene Identification
+
+      ↓
+
+Gene Function Analysis
+
+      ↓
+
+Trait Association
+
+
+Candidate gene analysis helps connect computational predictions with biological mechanisms controlling fruit development.
+
+---
+
+# 26. Tomato Fruit Weight Related Candidate Genes
+
+
+## 26.1 FAS (FASCIATED)
+
+
+FAS is one of the major tomato fruit size regulatory genes.
+
+
+Functions:
+
+- Controls carpel number development.
+- Influences fruit size.
+- Regulates locule formation.
+- Contributes to fruit weight variation.
+
+
+Changes in FAS activity can result in differences in tomato fruit morphology and size.
+
+---
+
+## 26.2 LC (LOCULE NUMBER)
+
+
+LC is another important tomato fruit development gene.
+
+
+Functions:
+
+- Controls the number of locules inside tomato fruits.
+- Regulates floral meristem development.
+- Influences fruit size and weight.
+
+
+Higher locule number is generally associated with larger tomato fruits.
+
+---
+
+## 26.3 SUN
+
+
+SUN is a major tomato fruit shape gene.
+
+
+Functions:
+
+- Controls fruit elongation.
+- Regulates cell division patterns.
+- Influences fruit morphology.
+
+
+SUN demonstrates how genetic variation can affect visible plant characteristics.
+
+---
+
+# 27. Chromosome-wise SNP Distribution
+
+
+The SNP distribution across chromosomes was analyzed to understand genome coverage.
+
+
+![Chromosome SNP Distribution](outputs/chromosome_SNP_distribution.png)
+
+
+## Interpretation
+
+
+The tomato genome contains:
+
+
+12 Chromosomes
+
+7699 SNP Markers
+
+
+
+The chromosome distribution plot confirms that SNP markers are distributed throughout the complete tomato genome.
+
+This ensures that the prediction models utilize genome-wide genetic information.
+
+---
+
+# 28. Streamlit Interactive Prediction System
+
+
+A Streamlit-based web application was developed to provide an interactive interface for genomic prediction and visualization.
+
+
+The application integrates:
+
+- Machine learning prediction
+- GWAS visualization
+- SHAP interpretation
+- SNP information
+- Candidate gene information
+
+
+---
+
+# 28.1 Fruit Weight Prediction
+
 
 Users can select a tomato plant ID.
 
-The system displays:
+The application provides:
 
 - Actual fruit weight
 - Predicted fruit weight
+- Prediction model output
 - Important SNP markers
 
 
 Example:
 
-```
+
 Plant ID:
+
 p-1-1
 
+Actual Fruit Weight:
 
-Actual Weight:
-24.75 g
+24.7 g
 
+Predicted Fruit Weight:
 
-Predicted Weight:
 26.1 g
-
-```
 
 
 ---
 
-## 2. GWAS Visualization
+# 28.2 GWAS Visualization
+
 
 The application displays:
 
@@ -452,53 +1032,81 @@ The application displays:
 - QQ Plot
 
 
----
-
-## 3. SHAP Dashboard
-
-Displays:
-
-- Top contributing SNP markers
-- SHAP scores
-- SNP importance ranking
-
+This allows users to explore genomic regions associated with fruit weight.
 
 ---
 
-# Project Structure
+# 28.3 SHAP Interpretation Dashboard
 
-```
+
+The dashboard provides:
+
+- Top important SNP markers
+- SHAP feature ranking
+- SNP contribution information
+
+
+This improves the interpretability of machine learning predictions.
+
+---
+
+# 28.4 Genomic Information Explorer
+
+
+The application provides information about:
+
+- SNP locations
+- Chromosome positions
+- Candidate genes
+- Biological interpretation
+
+
+---
+
+# 29. Project Repository Structure
+
+
+
 tomato_project/
 
 │
 ├── app/
-│   └── app.py
-│
-├── scripts/
-│   ├── GWAS analysis scripts
-│   ├── ML training scripts
-│   └── Visualization scripts
-│
-├── outputs/
-│   ├── GWAS results
-│   ├── Model files
-│   ├── SHAP results
-│   └── Plots
+│ └── app.py
 │
 ├── data/
-│   ├── Genotype data
-│   └── Phenotype data
+│ ├── genotype_data
+│ └── phenotype_data
+│
+├── graphs/
+│ ├── model_comparison_plot.py
+│ ├── chromosome_distribution.py
+│ └── predicted_actual_plot.py
+│
+├── scripts/
+│ ├── preprocessing.py
+│ ├── gwas.py
+│ ├── xgboost_prediction.py
+│ ├── random_forest_prediction.py
+│ ├── svr_prediction.py
+│ ├── lightgbm_prediction.py
+│ ├── shap_analysis.py
+│ └── candidate_gene_annotation.py
+│
+├── outputs/
+│ ├── GWAS Results
+│ ├── ML Models
+│ ├── SHAP Results
+│ └── Visualization Graphs
 │
 ├── requirements.txt
 │
 └── README.md
 
-```
-
 
 ---
 
-# Technologies Used
+# 30. Technologies Used
+
 
 ## Programming Language
 
@@ -514,13 +1122,16 @@ tomato_project/
 ## Machine Learning
 
 - XGBoost
+- Random Forest
+- Support Vector Regression
+- LightGBM
 - Scikit-learn
 
 
 ## Genomics Analysis
 
-- GWAS
-- SNP analysis
+- Genome-Wide Association Study
+- SNP Analysis
 
 
 ## Explainable AI
@@ -528,64 +1139,13 @@ tomato_project/
 - SHAP
 
 
+## Visualization
+
+- Matplotlib
+
+
 ## Web Application
 
 - Streamlit
 
-
 ---
-
-# Installation
-
-
-Clone repository:
-
-```
-git clone <repository-link>
-```
-
-
-Install dependencies:
-
-```
-pip install -r requirements.txt
-```
-
-
-Run application:
-
-```
-streamlit run app/app.py
-```
-
-
----
-
-# Future Improvements
-
-Future improvements include:
-
-- Improve prediction accuracy using advanced models
-- Include multiple tomato traits
-- Add genome browser functionality
-- Perform SNP-to-gene annotation
-- Integrate biological pathway analysis
-- Predict breeding value of tomato lines
-
-
----
-
-# Conclusion
-
-This project demonstrates the integration of genomics and artificial intelligence for tomato trait prediction.
-
-The developed system can:
-
-✓ Analyze thousands of SNP markers  
-✓ Identify trait-associated genomic regions  
-✓ Predict tomato fruit weight using machine learning  
-✓ Explain important genetic factors using SHAP  
-✓ Provide an interactive genomic prediction platform  
-
-
-The project contributes towards **genomic-assisted breeding**, where genetic information can be used to accelerate crop improvement.
